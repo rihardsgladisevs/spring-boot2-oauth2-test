@@ -1,0 +1,19 @@
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            clientId: [client_id]
+            clientSecret: [secret_id]
+          github:
+            clientId: [client_id]
+            clientSecret: [secret_id]
+          google:
+            clientId: [client_id]
+            clientSecret: [secret_id]
+          win:
+            clientId: [client_id]
+            clientSecret: [secret_id]
