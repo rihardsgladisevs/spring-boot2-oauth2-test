@@ -5,18 +5,7 @@ spring:
     oauth2:
       client:
         registration:
-          facebook:
-            clientId: 631891417196137
-            clientSecret: 9f121ca5bbba3359224a121c73493288
-          github:
-            clientId: 5b02d3b1e41d9ce025b3
-            clientSecret: cea63020c2c200f7efda5135f63cd1f459a243d9
-          google:
-            clientId: 617001640912-h12hna34dvld353bpbq9cnire8abk5u6.apps.googleusercontent.com
-            clientSecret: ozFI9UgRRXWHjA4-L8be67tU
           win:
-            clientId: b1e1c2da-e3f9-447b-bacd-a1518f966e64
-            clientSecret: IlVPhZn7VaUiOTb8dOqpG-VW23T2hKjjq43JdFN9
             clientName: WindowsServer2016
             scope: openid, profile, email
             client-authentication-method: form

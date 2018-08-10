@@ -1,6 +1,4 @@
 spring:
-  thymeleaf:
-    cache: false
   security:
     oauth2:
       client:
