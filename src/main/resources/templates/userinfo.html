@@ -14,6 +14,18 @@
             <span style="font-weight:bold" th:text="${userAttribute.key}"></span>: <span th:text="${userAttribute.value}"></span>
         </li>
     </ul>
+    <span style="font-weight:bold">Authentication Attributes:</span>
+    <ul>
+        <li th:each="authenticationAttribute : ${authenticationAttributes}">
+            <span style="font-weight:bold" th:text="${authenticationAttribute.key}"></span>: <span th:text="${authenticationAttribute.value}"></span>
+        </li>
+    </ul>
+    <span style="font-weight:bold">Authorities:</span>
+    <ul>
+        <li th:each="grantedAuthority : ${grantedAuthorities}">
+            <span style="font-weight:bold" th:text="${grantedAuthority.authority}"></span>
+        </li>
+    </ul>
 </div>
 </body>
 </html>
