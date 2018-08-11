@@ -13,12 +13,23 @@ spring:
             redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           win:
-            authorizationUri: https://192.168.33.89/adfs/oauth2/authorize?resource=https://weissr.com
+            authorizationUri: https://192.168.33.89/adfs/oauth2/authorize?resource=urn:microsoft:userinfo
             tokenUri: https://192.168.33.89/adfs/oauth2/token
             userInfoUri: https://192.168.33.89/adfs/userinfo
-            user-name-attribute: id
+            user-name-attribute: sub
             jwk-set-uri: https://192.168.33.89/adfs/discovery/keys
 
 logging:
   level:
     org.springframework.security: DEBUG
+
+server:
+  port: 8443
+  ssl:
+    key-alias: weissr
+    key-store: C:\projects\oauth-test\weissr.jks
+    key-store-password: 1password!
+    key-password: 1password!
+    trust-store: C:\projects\oauth-test\weissr.jks
+    trust-store-password: 1password!
+    enabled: true
