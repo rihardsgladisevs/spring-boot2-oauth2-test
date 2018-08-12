@@ -1,8 +1,6 @@
 package com.weissenrieder.oauthtest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -11,14 +9,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.reactive.function.client.ClientRequest;
-import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -45,41 +38,13 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/userinfo")
+    @GetMapping("/users/info")
     public String userInfo(Model model, OAuth2AuthenticationToken authentication) {
-        OAuth2AuthorizedClient authorizedClient =
-                this.authorizedClientService.loadAuthorizedClient(
-                        authentication.getAuthorizedClientRegistrationId(),
-                        authentication.getName());
-        Map userAttributes = Collections.emptyMap();
-        String userInfoEndpointUri = authorizedClient.getClientRegistration()
-                .getProviderDetails().getUserInfoEndpoint().getUri();
-        if (!StringUtils.isEmpty(userInfoEndpointUri)) {    // userInfoEndpointUri is optional for OIDC Clients
-            userAttributes = WebClient.builder()
-                    .filter(oauth2Credentials(authorizedClient))
-                    .build()
-                    .get()
-                    .uri(userInfoEndpointUri)
-                    .retrieve()
-                    .bodyToMono(Map.class)
-                    .block();
-        }
-        model.addAttribute("userAttributes", userAttributes);
         OAuth2User principal = authentication.getPrincipal();
         Map<String, Object> authenticationAttributes = principal.getAttributes();
         model.addAttribute("authenticationAttributes", authenticationAttributes);
         Collection<? extends GrantedAuthority> authorities = principal.getAuthorities();
         model.addAttribute("grantedAuthorities", authorities);
-        return "userinfo";
-    }
-
-    private ExchangeFilterFunction oauth2Credentials(OAuth2AuthorizedClient authorizedClient) {
-        return ExchangeFilterFunction.ofRequestProcessor(
-                clientRequest -> {
-                    ClientRequest authorizedRequest = ClientRequest.from(clientRequest)
-                            .header(HttpHeaders.AUTHORIZATION, "Bearer " + authorizedClient.getAccessToken().getTokenValue())
-                            .build();
-                    return Mono.just(authorizedRequest);
-                });
+        return "user-info";
     }
 }

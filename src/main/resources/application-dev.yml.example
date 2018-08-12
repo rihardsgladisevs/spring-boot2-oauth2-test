@@ -12,6 +12,6 @@ spring:
           google:
             clientId: [client_id]
             clientSecret: [secret_id]
-          win:
+          adfs:
             clientId: [client_id]
             clientSecret: [secret_id]

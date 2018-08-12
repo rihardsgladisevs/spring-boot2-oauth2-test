@@ -1,7 +1,6 @@
-# Spring Boot 2 OAuth 2.0 test application
-Tested:
-- parallel authorization, both username and OAuth through several providers
-- custom OAuth 2.0 provider based on Windows Server 2016 AD FS
+# Spring Boot 2 OpenID Connect (OIDC) test application
+Application is example on how to set up parallel authorization, for both OIDC and Form authorization on Spring Boot 2.0. As custom OIDC provider was used AD FS 4.0 (Windows Server 2016)
+> Only AD FS and Google works through OIDC in this example, others works on plain OAuth 2.0
 ## Certificate for AD FS
 Custom configuration on AD FS needed self signed certificate, which was generated with openssl
 ``` bash

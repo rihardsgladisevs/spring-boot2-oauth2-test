@@ -16,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationProvider authenticationProvider;
+    @Autowired
+    private CustomOidcUserService oidcUserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,7 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                     .loginPage("/login").permitAll()
                     .defaultSuccessUrl("/")
-                    .failureUrl("/loginFailure");
+                    .failureUrl("/loginFailure")
+                    .userInfoEndpoint()
+                        .oidcUserService(oidcUserService);
 		// @formatter:on
     }
 

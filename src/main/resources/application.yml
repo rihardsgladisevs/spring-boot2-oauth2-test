@@ -5,17 +5,17 @@ spring:
     oauth2:
       client:
         registration:
-          win:
-            clientName: WindowsServer2016
-            scope: openid, profile, email, allatclaims, user_impersonation
+          adfs:
+            clientName: AD FS on Windows Server 2016
+            scope: openid, profile
             client-authentication-method: form
             authorization-grant-type: authorization_code
             redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
-          win:
+          adfs:
             authorizationUri: https://192.168.33.89/adfs/oauth2/authorize?resource=https://192.168.33.89/adfs/services/trust
             tokenUri: https://192.168.33.89/adfs/oauth2/token
-#           userInfoUri: https://192.168.33.89/adfs/userinfo # Not working if working with scope OpenID
+            userInfoUri: https://192.168.33.89/adfs/userinfo
             user-name-attribute: sub
             jwk-set-uri: https://192.168.33.89/adfs/discovery/keys
 
