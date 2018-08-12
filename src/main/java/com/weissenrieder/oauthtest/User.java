@@ -22,7 +22,7 @@ public class User extends DefaultOidcUser {
     private String email;
 
     public User(Set<GrantedAuthority> authorities, OidcIdToken idToken) {
-        super(authorities, idToken, "sub");
+        super(authorities, idToken);
         this.id = idToken.getSubject();
         this.firstName = idToken.getGivenName();
         this.lastName = idToken.getFamilyName();
